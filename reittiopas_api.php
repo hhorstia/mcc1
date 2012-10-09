@@ -5,26 +5,41 @@ two locations or addresses given.
 Uses the REST API at http://developer.reittiopas.fi/pages/fi/http-get-interface-version-2.php?lang=EN
 */
 
-function findRouteDuration($from, $to) {
+class Reittiopas {
 
-$username = "";
-$password = "";
+	private $username = "";
+	private $password = "";
 
-$url_beginning = "http://api.reittiopas.fi/hsl/prod/?user=$username&pass=$password";
+	private $url;
+	
+	function __construct() {
+		$this->url = "http://api.reittiopas.fi/hsl/prod/?user=" . $this->username .
+			"&pass=" . $this->password;
+	
+	}
+	
+	public function findRouteDuration($from, $to) {
 
-$url_parameters = "&request=route&show=1&to=$to&from=$from";
+		$url_parameters = "&request=route&show=1&to=$to&from=$from";
 
-$response = file_get_contents($url_beginning . $url_parameters);
+		$response = file_get_contents($this->url . $url_parameters);
 
-$json = json_decode($response, true);
-//var_dump($json);
+		$json = json_decode($response, true);
+		//var_dump($json);
 
-return $json[0][0]['duration'];
+		return $json[0][0]['duration'];
 
-}
+	}
 
-function findCoordinates($address) {
+	public function findCoordinates($address) {
 
+		$url_parameters = "&request=geocode&key=teekkarik";
+	
+		$response = file_get_contents($this->url . $url_parameters);
+		$json = json_decode($response, true);
+	
+
+	}
 }
 
 ?>

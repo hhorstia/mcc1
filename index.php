@@ -26,7 +26,9 @@
 	$from = "2546445,6675512";
 	$to = "2549445,6675513";
 	
-	$duration = findRouteDuration($from, $to);
+	$ro = new Reittiopas();
+	
+	$duration = $ro->findRouteDuration($from, $to);
 	$duration_minutes = ($duration / 60) . " m " . ((($duration / 60) % 1) * 60) . " s";
 	
 	echo "Route from $from to $to, duration $duration seconds or $duration_minutes";
