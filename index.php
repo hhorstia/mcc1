@@ -29,9 +29,14 @@
 	$ro = new Reittiopas();
 	
 	$duration = $ro->findRouteDuration($from, $to);
-	$duration_minutes = ($duration / 60) . " m " . ((($duration / 60) % 1) * 60) . " s";
 	
-	echo "Route from $from to $to, duration $duration seconds or $duration_minutes";
+	echo "<p>Route from $from to $to, duration $duration seconds or " . ($duration / 60) . " minutes</p>";
+	
+	/***************************************************/
+	
+	$address = "Otakaari 1";
+	
+	echo "<p>Coordinates for $address: " . $ro->findCoordinates($address) . "</p>";
 
 ?>
 		

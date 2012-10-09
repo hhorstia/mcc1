@@ -19,26 +19,21 @@ class Reittiopas {
 	}
 	
 	public function findRouteDuration($from, $to) {
-
 		$url_parameters = "&request=route&show=1&to=$to&from=$from";
 
 		$response = file_get_contents($this->url . $url_parameters);
-
 		$json = json_decode($response, true);
-		//var_dump($json);
 
 		return $json[0][0]['duration'];
-
 	}
 
 	public function findCoordinates($address) {
-
-		$url_parameters = "&request=geocode&key=teekkarik";
+		$url_parameters = "&request=geocode&key=" . urlencode($address);
 	
 		$response = file_get_contents($this->url . $url_parameters);
 		$json = json_decode($response, true);
-	
-
+				
+		return $json[0]['coords'];
 	}
 }
 
