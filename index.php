@@ -1,7 +1,7 @@
 <!DOCTYPE html> 
 <html> 
 	<head> 
-	<title>My Page</title> 
+	<title>MCC 1</title> 
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" />
 	<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
@@ -13,12 +13,33 @@
 <div data-role="page">
 
 	<div data-role="header">
-		<h1>My Title</h1>
+		<h1>MCC 1</h1>
 	</div><!-- /header -->
 
 	<div data-role="content">	
 		<p id="demo">Hello world</p>
 		<button onclick="getLocation()">Try It</button>
+<?php
+	ini_set('display_errors', '1');
+	require_once('reittiopas_api.php');
+	
+	$from = "2546445,6675512";
+	$to = "2549445,6675513";
+	
+	$ro = new Reittiopas();
+	
+	$duration = $ro->findRouteDuration($from, $to);
+	
+	echo "<p>Route from $from to $to, duration $duration seconds or " . ($duration / 60) . " minutes</p>";
+	
+	/***************************************************/
+	
+	$address = "Otakaari 1";
+	
+	echo "<p>Coordinates for $address: " . $ro->findCoordinates($address) . "</p>";
+
+?>
+		
 	</div><!-- /content -->
 
 </div><!-- /page -->
